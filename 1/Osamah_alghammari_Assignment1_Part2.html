@@ -1,0 +1,160 @@
+
+<style>
+button#Apple:focus{
+  background:red;
+}
+button#Lemon:focus{
+  background:green;
+}
+button#Carrot:focus{
+  background:orange;
+}
+button#Banana:focus{
+  background: yellow;
+}
+button#Pear:focus { 
+  background:blue}
+  
+.buttons{
+  border-radius: 20px;
+  box-shadow: inset 0 1px 2px rgb(112,0,0);
+  width: auto;
+  height: auto;
+  font-size: 20px;
+}
+
+.functions{
+  border-radius: 20px;
+  box-shadow: inset 0 1px 2px rgb(224,0,0);
+  width: auto;
+  height: auto;
+  font-size: 15px;
+}
+
+.goods{
+  display:inline-block;
+  border-radius: 40px;
+  box-shadow: inset 0 1px 2px rgba(25, 25, 0, .25);
+  width: auto;
+  height: auto;
+  font-size: 20px;
+}
+</style>
+
+
+<body>
+<form name="calculator" id="calculator">
+    <table  border = "0" width = "300">
+        <tr>
+            <td>price in $$:</td>
+            <td><input type="text" id="answer"></td></tr>
+    </table>
+
+<br>
+<input type="button" value="1" class="buttons" onClick="document.calculator.answer.value+='1'">
+<input type="button" value="2" class="buttons" onClick="document.calculator.answer.value+='2'">
+<input type="button" value="3" class="buttons" onClick="document.calculator.answer.value+='3'">
+<button type="button" class="goods" onclick="myFunction(this)" id="Apple">Apple</button>
+<br>
+<input type="button" value="4" class="buttons" onClick="document.calculator.answer.value+='4'">
+<input type="button" value="5" class="buttons" onClick="document.calculator.answer.value+='5'">
+<input type="button" value="6" class="buttons" onClick="document.calculator.answer.value+='6'">
+<button type="button" class="goods" onclick="myFunction(this)" id="Lemon">Lemon</button>
+<br>
+<input type="button" value="7" class="buttons" onClick="document.calculator.answer.value+='7'">
+<input type="button" value="8" class="buttons" onClick="document.calculator.answer.value+='8'">
+<input type="button" value="9" class="buttons" onClick="document.calculator.answer.value+='9'">
+<button type="button" class="goods" onclick="myFunction(this)" id="Carrot">Carrot</button>
+<br>
+
+<input type="button" value="+" class="functions" onClick="document.calculator.answer.value+='+'">
+<input type="button" value="-" class="functions" onClick="document.calculator.answer.value+='-'">
+<button type="reset" class="functions">reset</button>
+<button type="button" class="goods" onclick="myFunction(this)" id="Banana">Banana</button>
+<br>
+
+<button type="button" class="goods" onclick="myFunction(this)" id="Pear">Pear</button>
+
+
+<script>
+function myFunction(elem) {
+		var buffer, final, plus, minus;
+    buffer = document.getElementById("answer").value;
+    final = buffer.split("")
+		plus = final.indexOf('+') > -1;
+  	minus = final.indexOf('-') > -1;
+    
+		if (elem.id == "Apple"){
+    if (plus == true){
+    buffer = buffer.split("+");
+    document.getElementById("answer").value = eval((Number(buffer[1])*2)+Number(buffer[0]));
+    return;
+    }else if (minus == true ){
+    buffer = buffer.split("-");
+    document.getElementById("answer").value = eval((Number(buffer[0]-Number(buffer[1])*2)));
+    return;
+    }else{
+    document.getElementById("answer").value = eval(document.calculator.answer.value*2);
+    }
+    }
+    
+    else if (elem.id == "Lemon"){
+    if (plus == true){
+    buffer = buffer.split("+");
+    document.getElementById("answer").value = eval((Number(buffer[1])*4)+Number(buffer[0]));
+    return;
+    }else if (minus == true ){
+    buffer = buffer.split("-");
+    document.getElementById("answer").value = eval((Number(buffer[0]-Number(buffer[1])*4)));
+    return;
+    }else{
+    document.getElementById("answer").value = eval(document.calculator.answer.value*4);
+    }
+    }
+    
+    else if(elem.id == "Carrot"){
+    if (plus == true){
+    buffer = buffer.split("+");
+    document.getElementById("answer").value = eval((Number(buffer[1])*1)+Number(buffer[0]));
+    return;
+    }else if (minus == true ){
+    buffer = buffer.split("-");
+    document.getElementById("answer").value = eval((Number(buffer[0]-Number(buffer[1])*1)));
+    return;
+    }else{
+    document.getElementById("answer").value = eval(document.calculator.answer.value*1);
+    }
+    }
+    
+    else if (elem.id == "Banana"){
+    if (plus == true){
+    buffer = buffer.split("+");
+    document.getElementById("answer").value = eval((Number(buffer[1])*3)+Number(buffer[0]));
+    return;
+    }else if (minus == true ){
+    buffer = buffer.split("-");
+    document.getElementById("answer").value = eval((Number(buffer[0]-Number(buffer[1])*3)));
+    return;
+    }else{
+    document.getElementById("answer").value = eval(document.calculator.answer.value*3);
+    }
+    }
+    
+    else if (elem.id == "Pear"){
+    if (plus == true){
+    buffer = buffer.split("+");
+    document.getElementById("answer").value = eval((Number(buffer[1])*5)+Number(buffer[0]));
+    return;
+    }else if (minus == true ){
+    buffer = buffer.split("-");
+    document.getElementById("answer").value = eval((Number(buffer[0]-Number(buffer[1])*5)));
+    return;
+    }else{
+    document.getElementById("answer").value = eval(document.calculator.answer.value*5);
+    }
+    }
+}
+
+
+</script>
+

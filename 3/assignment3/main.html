@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 3</title>
+
+    <script type="text/javascript" src="d3/d3.js" charset="utf-8"></script>
+    <script src="countries.json"></script>
+    <style type="text/css">
+        #tooltip {
+        		position: absolute;
+        		width: 200px;
+        		height: auto;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip.hidden {
+	      		display: none;
+		}
+
+		#tooltip p {
+        		margin: 0;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+
+
+    </style>
+
+    <style>
+    #tooltip1 {
+            position: absolute;
+        		margin:100px 46px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip1.hidden1 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip2 {
+            position: absolute;
+        		margin:100px 105px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip2.hidden2 {
+	      		display: none;
+		}
+    </style>
+    <style>
+     #tooltip3 {
+            position: absolute;
+        		margin:100px 164px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip3.hidden3 {
+	      		display: none;
+		}
+    </style>
+
+    <style>
+     #tooltip4 {
+            position: absolute;
+        		margin:100px 223px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip4.hidden4 {
+	      		display: none;
+		}
+    </style>
+
+    <style>
+     #tooltip5 {
+            position: absolute;
+        		margin:100px 282px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip5.hidden5 {
+	      		display: none;
+		}
+    </style>
+
+    <style>
+     #tooltip6 {
+            position: absolute;
+        		margin:100px 341px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip6.hidden6 {
+	      		display: none;
+		}
+    </style>
+
+    <style>
+     #tooltip7 {
+            position: absolute;
+        		margin:100px 400px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip7.hidden7 {
+	      		display: none;
+		}
+    </style>
+
+
+    <style>
+     #tooltip8 {
+            position: absolute;
+        		margin:100px 459px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip8.hidden8 {
+	      		display: none;
+		}
+    </style>
+
+
+    <style>
+     #tooltip9 {
+            position: absolute;
+        		margin:100px 518px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip9.hidden9 {
+	      		display: none;
+		}
+    </style>
+
+    <style>
+     #tooltip10 {
+            position: absolute;
+        		margin:100px 577px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip10.hidden10 {
+	      		display: none;
+		}
+    </style>
+
+    <style>
+     #tooltip11 {
+            position: absolute;
+        		margin:100px 636px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip11.hidden11 {
+	      		display: none;
+		}
+    </style>
+
+    <style>
+     #tooltip12 {
+            position: absolute;
+        		margin:100px 695px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip12.hidden12 {
+	      		display: none;
+		}
+    </style>
+
+    <style>
+     #tooltip13 {
+            position: absolute;
+        		margin:100px 754px;
+        		padding: 10px;
+        		background-color: white;
+                border-radius: 10px;
+		}
+
+        #tooltip13.hidden13 {
+	      		display: none;
+		}
+    </style>
+    <style type="text/css">
+        #tooltip001 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip001.hidden001 {
+	      		display: none;
+		}
+
+		#tooltip001 p {
+        		margin: 0 ;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+
+
+    </style>
+    <style>
+    #tooltip002 {
+            position: absolute;
+                margin:100px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip002.hidden002 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip003 {
+            position: absolute;
+        		margin:40px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip003.hidden003 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip004 {
+            position: absolute;
+        		margin:250px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip004.hidden004 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip005 {
+            position: absolute;
+        		margin:230px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip005.hidden005 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip006 {
+            position: absolute;
+        		margin:200px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip006.hidden006 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip007 {
+            position: absolute;
+        		margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip007.hidden007 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip008 {
+            position: absolute;
+        		margin:130px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip008.hidden008 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip009 {
+            position: absolute;
+        		margin:90px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip009.hidden009 {
+	      		display: none;
+		}
+    </style>
+    <style>
+    #tooltip010 {
+            position: absolute;
+        		margin:100px 46px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip010.hidden010 {
+	      		display: none;
+		}
+    </style>
+
+
+
+
+</head>
+<body>
+<div id="tooltip" class="hidden">
+        	<p><strong id = "value">100</strong></p>
+        	<p><span id="value2">100</span></p>
+</div>
+
+<div id="tooltip1" class="hidden1"></div>
+<div id="tooltip2" class="hidden2"></div>
+<div id="tooltip3" class="hidden3"></div>
+<div id="tooltip4" class="hidden4"></div>
+<div id="tooltip5" class="hidden5"></div>
+<div id="tooltip6" class="hidden6"></div>
+<div id="tooltip7" class="hidden7"></div>
+<div id="tooltip8" class="hidden8"></div>
+<div id="tooltip9" class="hidden9"></div>
+<div id="tooltip10" class="hidden10"></div>
+<div id="tooltip11" class="hidden11"></div>
+<div id="tooltip12" class="hidden12"></div>
+<div id="tooltip13" class="hidden13"></div>
+
+
+<div id="tooltip001" class="hidden001"></div>
+<div id="tooltip002" class="hidden002"></div>
+<div id="tooltip003" class="hidden003"></div>
+<div id="tooltip004" class="hidden004"></div>
+<div id="tooltip005" class="hidden005"></div>
+<div id="tooltip006" class="hidden006"></div>
+<div id="tooltip007" class="hidden007"></div>
+<div id="tooltip008" class="hidden008"></div>
+<div id="tooltip009" class="hidden009"></div>
+<div id="tooltip010" class="hidden010"></div>
+
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>

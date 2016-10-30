@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Assignment 3</title>
+
+    <script type="text/javascript" src="d3/d3.js" charset="utf-8"></script>
+    <script src="countries.json"></script>
+    <style type="text/css">
+		circle.node {
+  			cursor: pointer;
+  			stroke: #000;
+ 			 stroke-width: .5px;
+		}
+
+		line.link {
+  			fill: none;
+  			stroke: #9ecae1;
+  			stroke-width: 1.5px;
+		}
+        </style>
+	<style type="text/css">
+        #tooltip {
+        		position: absolute;
+        		width: 200px;
+        		height: auto;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip.hidden {
+	      		display: none;
+		}
+
+		#tooltip p {
+        		margin: 0;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+	    <style type="text/css">
+        #tooltip001 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip001.hidden001 {
+	      		display: none;
+		}
+
+		#tooltip001 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style type="text/css">
+		.axis path,
+		.axis line {
+    			fill: none;
+    			stroke: black;
+    			shape-rendering: crispEdges;
+		}
+
+		.axis text {
+   			 font-family: sans-serif;
+    			 font-size: 11px;
+		}
+        </style>
+	    <style type="text/css">
+        #tooltip002 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip002.hidden002 {
+	      		display: none;
+		}
+
+		#tooltip002 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip003 {
+            position: absolute;
+        		margin:40px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip003.hidden003 {
+	      		display: none;
+		}
+        #tooltip003 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip004 {
+            position: absolute;
+        		margin:250px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip004.hidden004 {
+	      		display: none;
+		}
+        #tooltip004 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip005 {
+            position: absolute;
+        		margin:230px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip005.hidden005 {
+	      		display: none;
+		}
+        #tooltip005 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip006 {
+            position: absolute;
+        		margin:200px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip006.hidden006 {
+	      		display: none;
+		}
+        #tooltip006 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip007 {
+            position: absolute;
+        		margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip007.hidden007 {
+	      		display: none;
+		}
+        #tooltip007 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip008 {
+            position: absolute;
+        		margin:130px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip008.hidden008 {
+	      		display: none;
+		}
+        #tooltip008 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip009 {
+            position: absolute;
+        		margin:90px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip009.hidden009 {
+	      		display: none;
+		}
+        #tooltip009 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip010 {
+            position: absolute;
+        		margin:100px 46px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip010.hidden010 {
+	      		display: none;
+		}
+        #tooltip010 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+
+
+
+
+
+
+     <style type="text/css">
+        #tooltip011 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip011.hidden011 {
+	      		display: none;
+		}
+
+		#tooltip011 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+	    <style type="text/css">
+        #tooltip012 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip012.hidden012 {
+	      		display: none;
+		}
+
+		#tooltip012 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip013 {
+            position: absolute;
+        		margin:40px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip013.hidden013 {
+	      		display: none;
+		}
+        #tooltip013 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip014 {
+            position: absolute;
+        		margin:250px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip014.hidden014 {
+	      		display: none;
+		}
+        #tooltip014 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip015 {
+            position: absolute;
+        		margin:230px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip015.hidden015 {
+	      		display: none;
+		}
+        #tooltip015 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip016 {
+            position: absolute;
+        		margin:200px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip016.hidden016 {
+	      		display: none;
+		}
+        #tooltip016 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip017 {
+            position: absolute;
+        		margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip017.hidden017 {
+	      		display: none;
+		}
+        #tooltip017 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip018 {
+            position: absolute;
+        		margin:130px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip018.hidden018 {
+	      		display: none;
+		}
+        #tooltip018 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip019 {
+            position: absolute;
+        		margin:90px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip019.hidden019 {
+	      		display: none;
+		}
+        #tooltip019 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip020 {
+            position: absolute;
+        		margin:100px 46px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip020.hidden020 {
+	      		display: none;
+		}
+        #tooltip020 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+
+
+    <style type="text/css">
+        #tooltip021 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip021.hidden021 {
+	      		display: none;
+		}
+
+		#tooltip021 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+	    <style type="text/css">
+        #tooltip022 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip022.hidden022 {
+	      		display: none;
+		}
+
+		#tooltip022 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip023 {
+            position: absolute;
+        		margin:40px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip023.hidden023 {
+	      		display: none;
+		}
+        #tooltip023 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip024 {
+            position: absolute;
+        		margin:250px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip024.hidden024 {
+	      		display: none;
+		}
+        #tooltip024 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip025 {
+            position: absolute;
+        		margin:230px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip025.hidden025 {
+	      		display: none;
+		}
+        #tooltip025 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip026 {
+            position: absolute;
+        		margin:200px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip026.hidden026 {
+	      		display: none;
+		}
+        #tooltip026 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip027 {
+            position: absolute;
+        		margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip027.hidden027 {
+	      		display: none;
+		}
+        #tooltip027 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip028 {
+            position: absolute;
+        		margin:130px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip028.hidden028 {
+	      		display: none;
+		}
+        #tooltip028 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip029 {
+            position: absolute;
+        		margin:90px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip029.hidden029 {
+	      		display: none;
+		}
+        #tooltip029 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip030 {
+            position: absolute;
+        		margin:100px 46px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip030.hidden030 {
+	      		display: none;
+		}
+        #tooltip030 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+        <style type="text/css">
+        #tooltip031 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip031.hidden031 {
+	      		display: none;
+		}
+
+		#tooltip031 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+	    <style type="text/css">
+        #tooltip032 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip032.hidden032 {
+	      		display: none;
+		}
+
+		#tooltip032 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip033 {
+            position: absolute;
+        		margin:40px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip033.hidden033 {
+	      		display: none;
+		}
+        #tooltip033 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip034 {
+            position: absolute;
+        		margin:250px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip034.hidden034 {
+	      		display: none;
+		}
+        #tooltip034 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip035 {
+            position: absolute;
+        		margin:230px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip035.hidden035 {
+	      		display: none;
+		}
+        #tooltip035 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip036 {
+            position: absolute;
+        		margin:200px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip036.hidden036 {
+	      		display: none;
+		}
+        #tooltip036 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip037 {
+            position: absolute;
+        		margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip037.hidden037 {
+	      		display: none;
+		}
+        #tooltip037 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip038 {
+            position: absolute;
+        		margin:130px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip038.hidden038 {
+	      		display: none;
+		}
+        #tooltip038 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip039 {
+            position: absolute;
+        		margin:90px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip039.hidden039 {
+	      		display: none;
+		}
+        #tooltip039 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip040 {
+            position: absolute;
+        		margin:100px 46px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip040.hidden040 {
+	      		display: none;
+		}
+        #tooltip040 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+
+     <style type="text/css">
+        #tooltip041 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip041.hidden041 {
+	      		display: none;
+		}
+
+		#tooltip041 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+	    <style type="text/css">
+        #tooltip042 {
+        		position: absolute;
+                margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+		#tooltip042.hidden042 {
+	      		display: none;
+		}
+
+		#tooltip042 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip043 {
+            position: absolute;
+        		margin:40px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip043.hidden043 {
+	      		display: none;
+		}
+        #tooltip043 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip044 {
+            position: absolute;
+        		margin:250px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip044.hidden044 {
+	      		display: none;
+		}
+        #tooltip044 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip045 {
+            position: absolute;
+        		margin:230px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip045.hidden045 {
+	      		display: none;
+		}
+        #tooltip045 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip046 {
+            position: absolute;
+        		margin:200px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip046.hidden046 {
+	      		display: none;
+		}
+        #tooltip046 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip047 {
+            position: absolute;
+        		margin:150px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip047.hidden047 {
+	      		display: none;
+		}
+        #tooltip047 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip048 {
+            position: absolute;
+        		margin:130px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip048.hidden048 {
+	      		display: none;
+		}
+        #tooltip048 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip049 {
+            position: absolute;
+        		margin:90px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip049.hidden049 {
+	      		display: none;
+		}
+        #tooltip049 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip050 {
+            position: absolute;
+        		margin:100px 46px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip050.hidden050 {
+	      		display: none;
+		}
+        #tooltip050 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+
+    <style>
+    #tooltip051 {
+            position: absolute;
+        		margin:90px 200px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip051.hidden051 {
+	      		display: none;
+		}
+        #tooltip051 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+    <style>
+    #tooltip052 {
+            position: absolute;
+        		margin:100px 46px;
+        		padding: 10px;
+        		background-color: white;
+        		border-radius: 10px;
+        		box-shadow: 4px 4px 10px rgba(0, 0, 0, 0.4);
+        		pointer-events: none;
+		}
+
+        #tooltip052.hidden052 {
+	      		display: none;
+		}
+        #tooltip052 p {
+                margin-top: auto;
+                margin-left: 160px;
+		        font-family: sans-serif;
+        		font-size: 16px;
+        		line-height: 20px;
+		}
+    </style>
+</head>
+<body>
+<div id="tooltip" class="hidden">
+	<p><strong id = "value">100</strong></p>
+	<p><span id="value2">100</span></p>
+</div>
+<form>
+	Note:Click on the node without moving the mouse to show the country's stack graph.
+</form>
+<form>
+	Move the graph to show the labels:-
+    <label><input type="radio" name="assignment4" id="hide_labels" checked> Hide Labels </label>
+    <label><input type="radio" name="assignment4" id="show_labels"> Show Labels </label>
+</form>
+
+
+<div id="tooltip001" class="hidden001">
+    <p><strong id = "value001">100</strong></p>
+</div>
+<div id="tooltip002" class="hidden002">
+    <p><strong id = "value002">100</strong></p>
+</div>
+<div id="tooltip003" class="hidden003">
+     <p><strong id = "value003">100</strong></p>
+</div>
+<div id="tooltip004" class="hidden004">
+     <p><strong id = "value004">100</strong></p>
+</div>
+<div id="tooltip005" class="hidden005">
+     <p><strong id = "value005">100</strong></p>
+</div>
+<div id="tooltip006" class="hidden006">
+     <p><strong id = "value006">100</strong></p>
+</div>
+<div id="tooltip007" class="hidden007">
+     <p><strong id = "value007">100</strong></p>
+</div>
+<div id="tooltip008" class="hidden008">
+     <p><strong id = "value008">100</strong></p>
+</div>
+<div id="tooltip009" class="hidden009">
+     <p><strong id = "value009">100</strong></p>
+</div>
+<div id="tooltip010" class="hidden010">
+     <p><strong id = "value010">100</strong></p>
+</div>
+
+<div id="tooltip011" class="hidden011">
+    <p><strong id = "value011">100</strong></p>
+</div>
+<div id="tooltip012" class="hidden012">
+    <p><strong id = "value012">100</strong></p>
+</div>
+<div id="tooltip013" class="hidden013">
+     <p><strong id = "value013">100</strong></p>
+</div>
+<div id="tooltip014" class="hidden014">
+     <p><strong id = "value014">100</strong></p>
+</div>
+<div id="tooltip015" class="hidden015">
+     <p><strong id = "value015">100</strong></p>
+</div>
+<div id="tooltip016" class="hidden016">
+     <p><strong id = "value016">100</strong></p>
+</div>
+<div id="tooltip017" class="hidden017">
+     <p><strong id = "value017">100</strong></p>
+</div>
+<div id="tooltip018" class="hidden018">
+     <p><strong id = "value018">100</strong></p>
+</div>
+<div id="tooltip019" class="hidden019">
+     <p><strong id = "value019">100</strong></p>
+</div>
+<div id="tooltip020" class="hidden020">
+     <p><strong id = "value020">100</strong></p>
+</div>
+
+<div id="tooltip021" class="hidden021">
+    <p><strong id = "value021">100</strong></p>
+</div>
+<div id="tooltip022" class="hidden022">
+    <p><strong id = "value022">100</strong></p>
+</div>
+<div id="tooltip023" class="hidden023">
+     <p><strong id = "value023">100</strong></p>
+</div>
+<div id="tooltip024" class="hidden024">
+     <p><strong id = "value024">100</strong></p>
+</div>
+<div id="tooltip025" class="hidden025">
+     <p><strong id = "value025">100</strong></p>
+</div>
+<div id="tooltip026" class="hidden026">
+     <p><strong id = "value026">100</strong></p>
+</div>
+<div id="tooltip027" class="hidden027">
+     <p><strong id = "value027">100</strong></p>
+</div>
+<div id="tooltip028" class="hidden028">
+     <p><strong id = "value028">100</strong></p>
+</div>
+<div id="tooltip029" class="hidden029">
+     <p><strong id = "value029">100</strong></p>
+</div>
+<div id="tooltip030" class="hidden030">
+     <p><strong id = "value030">100</strong></p>
+</div>
+
+<div id="tooltip031" class="hidden031">
+    <p><strong id = "value031">100</strong></p>
+</div>
+<div id="tooltip032" class="hidden032">
+    <p><strong id = "value032">100</strong></p>
+</div>
+<div id="tooltip033" class="hidden033">
+     <p><strong id = "value033">100</strong></p>
+</div>
+<div id="tooltip034" class="hidden034">
+     <p><strong id = "value034">100</strong></p>
+</div>
+<div id="tooltip035" class="hidden035">
+     <p><strong id = "value035">100</strong></p>
+</div>
+<div id="tooltip036" class="hidden036">
+     <p><strong id = "value036">100</strong></p>
+</div>
+<div id="tooltip037" class="hidden037">
+     <p><strong id = "value037">100</strong></p>
+</div>
+<div id="tooltip038" class="hidden038">
+     <p><strong id = "value038">100</strong></p>
+</div>
+<div id="tooltip039" class="hidden039">
+     <p><strong id = "value039">100</strong></p>
+</div>
+<div id="tooltip040" class="hidden040">
+     <p><strong id = "value040">100</strong></p>
+</div>
+
+<div id="tooltip041" class="hidden041">
+    <p><strong id = "value041">100</strong></p>
+</div>
+<div id="tooltip042" class="hidden042">
+    <p><strong id = "value042">100</strong></p>
+</div>
+<div id="tooltip043" class="hidden043">
+     <p><strong id = "value043">100</strong></p>
+</div>
+<div id="tooltip044" class="hidden044">
+     <p><strong id = "value044">100</strong></p>
+</div>
+<div id="tooltip045" class="hidden045">
+     <p><strong id = "value045">100</strong></p>
+</div>
+<div id="tooltip046" class="hidden046">
+     <p><strong id = "value046">100</strong></p>
+</div>
+<div id="tooltip047" class="hidden047">
+     <p><strong id = "value047">100</strong></p>
+</div>
+<div id="tooltip048" class="hidden048">
+     <p><strong id = "value048">100</strong></p>
+</div>
+<div id="tooltip049" class="hidden049">
+     <p><strong id = "value049">100</strong></p>
+</div>
+<div id="tooltip050" class="hidden050">
+     <p><strong id = "value050">100</strong></p>
+</div>
+
+<div id="tooltip051" class="hidden051">
+    <p><strong id = "value051">100</strong></p>
+</div>
+<div id="tooltip052" class="hidden052">
+    <p><strong id = "value052">100</strong></p>
+</div>
+
+<form>
+    <input type="range" min="2000" max="2012" value="0" step="1" onchange="showValue(this.value)" />
+<span id="range">2000</span>
+
+    <script type="text/javascript" src="main.js"></script>
+</body>
+</html>
